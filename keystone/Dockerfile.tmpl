@@ -12,7 +12,7 @@ RUN apk add --no-cache --virtual .base_deps ca-certificates curl libffi libressl
     apk add --no-cache --virtual .build-deps gcc git libc-dev libffi-dev linux-headers make libressl-dev sqlite-dev zlib-dev
     {{- range .Values.build_packages }} {{ . }}{{ end }} && \
     {{ if eq .Values.install "git" -}}
-    git clone -b {{ .Values.branch }} {{ .Values.location }} /src/
+    git clone -b {{ .Values.branch }} {{ .Values.location }} /src/ && \
     {{ end -}}
     cd /src && \
     pip install . && \

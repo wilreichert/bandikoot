@@ -7,17 +7,17 @@ Kolla arch is nice but its got a couple shortcomings
 
 Lets fix it with Alpine!!!
 
-# Desired Goals
-- output human readable Dockerfiles
-- need some kind of templating / preprocessing
+Configs & init scripts will be dropped in via openstack-helm so configuration isn't much of a concern
 
-- static uid / gid across the board
+# Desired Goals
+- output human readable Dockerfiles that look nice
+
+- static uid / gid across all images
 - sudo user perm setup
 - build in unit tests
 
 - users should be able to easily override default yaml configs
-- override pip versions
-- add / configure additional packages
+- override versions from the various openstack requirements.txt file
 - start / end blocks for package
 
 - CI friendly
@@ -34,3 +34,5 @@ Lets fix it with Alpine!!!
 - upstream alpine images whenever possible (3.5 across the board?)
 - select git repo
 - select branch
+- need some kind of templating / preprocessing
+- add / configure additional packages

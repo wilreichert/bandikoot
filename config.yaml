@@ -42,7 +42,7 @@ glance:
 
   install: git
   location: https://github.com/openstack/glance.git
-  branch: newton
+  branch: stable/newton
 
   services:
   - api
