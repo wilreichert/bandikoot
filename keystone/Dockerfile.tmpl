@@ -1,0 +1,14 @@
+FROM {{.base_openstack_image}}
+
+ENV TZ ":/etc/localtime"
+
+COPY .src/ /src/
+
+RUN apk update && \
+    apk add --no-cache --virtual .base_deps ca-certificates curl libffi libressl sudo tar && \
+    apk add --no-cache --virtual .keystone_run_deps apache2 uwsgi && \
+    apk add --no-cache --virtual .build-deps gcc git libc-dev libffi-dev linux-headers make libressl-dev sqlite-dev zlib-dev
+RUN cd /src && \
+    pip install . && \
+    apk del .build-deps && \
+    rm -rf /src ~/.cache /var/cache/apk/*
