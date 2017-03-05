@@ -1,0 +1,4 @@
+bdkt/bdkt
+keystone/Dockerfile
+glance/Dockerfile
+openstack/*

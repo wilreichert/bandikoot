@@ -1,6 +1,6 @@
 .PHONY: bdkt python mariadb memcached rabbitmq keystone
 
-all: bdkt python mariadb memcached python rabbitmq keystone
+all: bootstrap build
 
 bootstrap: bdkt	python
 
@@ -33,10 +33,10 @@ nova: build-nova
 rabbitmq: build-rabbitmq
 
 clean:
-	docker rmi python:2.7-alpine3.5
-	rm bkdt/bdkt
-	rm keystone/Dockerfile
-	rm glance/Dockerfile
+	docker rmi python:2.7-alpine3.5 | true
+	rm -f bdkt/bdkt
+	rm -f {keystone,glance}/Dockerfile
 
 build-%:
-	docker build --rm -t $* --pull --build-arg TEST=asd -f $*/Dockerfile .
+	bdkt/bdkt -config config.yaml -service $*
+	docker build --rm -t $* --build-arg TEST=asd -f $*/Dockerfile .

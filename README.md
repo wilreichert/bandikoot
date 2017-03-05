@@ -8,6 +8,7 @@ Kolla arch is nice but its got a couple shortcomings
 Lets fix it with Alpine!!!
 
 # Desired Goals
+- output human readable Dockerfiles
 - need some kind of templating / preprocessing
 
 - static uid / gid across the board

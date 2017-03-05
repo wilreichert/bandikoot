@@ -1,17 +1,49 @@
 # main config file
 
-# image to use, must be Alpine 3.{4,5} based & container python
-base_openstack_image: python:2.7-alpine3.5
+# extra packages to install for all images
+packages:
+- sed
+- grep
+
+# build packages are installed for the length of the build then removed
+build_packages:
 
 openstack:
+  # image to use, must be Alpine 3.{4,5} based & container python
+  base_image: python:2.7-alpine3.5
+
   # local: directory
   # git: via git
   install: local
 
   # directory or url. Assumption is all src is in same base url or directory
-  # can override individual components by defining additional variables
-  #   keystone_location: /path/to/somewhere/keystone
-  location: /home/goat/src/openstack
+  # can override on a per service basis
+  location: openstack
 
   # if OPENSTACK_INSTALL="git", branch to use
-  release: newton
+  branch: newton
+
+  # extra packages to install for openstack images
+  #packages:
+  #- bash
+
+keystone:
+  # override openstack location
+  location: /home/goat/src/openstack/keystone
+
+  # extra packages to install for keystone image
+  packages:
+  - rsyslog
+
+glance:
+  # extra packages to install for keystone image
+  packages:
+  - bash
+
+  install: git
+  location: https://github.com/openstack/glance.git
+  branch: newton
+
+  services:
+  - api
+  - registry
